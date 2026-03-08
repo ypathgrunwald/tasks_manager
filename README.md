@@ -20,15 +20,15 @@ A simple Python application to manage tasks, focusing on TDD and unit testing pr
 
 ## CONSTANTS
 - **Status constants**
- - UNASSIGNED = "Unassigned" - Tasks are created in Unassigned Status
- - PENDING = "Pending" - Tasks moved to Pending Status once a task is in work
- - COMPLETE = "Complete" - Tasks move to complete status once they are finished
+ - UNASSIGNED = "UNASSIGNED" - Tasks are created in Unassigned Status
+ - PENDING = "PENDING" - Tasks moved to Pending Status once a task is in work
+ - COMPLETE = "COMPLETE" - Tasks move to complete status once they are finished
 
 - **Priority constants**
- - UNASSIGNED = "Unassigned"
- - LOW = "Low"
- - MEDIUM = "Medium"
- - HIGH = "High"
+ - UNASSIGNED = "UNASSIGNED"
+ - LOW = "LOW"
+ - MEDIUM = "MEDIUM"
+ - HIGH = "HIGH"
 
 ## Testing Goals
 - Use TDD for all new functionality.
