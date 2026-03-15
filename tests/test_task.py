@@ -12,9 +12,9 @@ ToString equivalent __repr__
 
 '''
 class TestTask(unittest.TestCase):
-    def test_create_task(self):
+    def test_create_task_with_default_values(self):
         """
-        Tests Task creation
+        Tests Task creation with default values
         :return:
         """
         task = Task("Task1")
@@ -22,11 +22,33 @@ class TestTask(unittest.TestCase):
         self.assertEqual(Task.Priority.UNASSIGNED, task.priority)
         self.assertEqual(Task.Status.UNASSIGNED, task.status)
 
+    def test_create_task_with_explicit_values(self):
+        """
+        Test task creation with explicit values
+        :return:
+        """
         # test priority and status assignment
         task = Task("Task2", Task.Status.PENDING, Task.Priority.LOW)
         self.assertEqual("Task2", task.title)
         self.assertEqual(Task.Priority.LOW, task.priority)
         self.assertEqual(Task.Status.PENDING, task.status)
+
+    def test_task_with_empty_name(self):
+        """
+        Tests if empty task name will raise a value error
+        :return:
+        """
+        with self.assertRaises(ValueError):
+            Task("")
+
+    def test_task_with_none_as_name(self):
+        """
+        Tests if None used for task name will raise a value error
+        :return:
+        """
+        with self.assertRaises(ValueError):
+            Task(None)
+
 
     def test_mark_status_unassigned(self):
         """
@@ -82,29 +104,68 @@ class TestTask(unittest.TestCase):
         task.priority = Task.Priority.LOW
         self.assertEqual(Task.Priority.LOW, task.priority)
 
-    def test_priority_setter_incorrect_value(self):
+    def test_change_priority_incorrect_value(self):
         """
         Tests if setter error is raised if Priority value is incorrect
         :return:
         """
         task = Task("T1")
         with self.assertRaises(ValueError):
-            task.priority = "NOT_A_VALID_PRIORITY"
+            task.change_priority("NOT_A_VALID_PRIORITY")
 
-    def test_change_priority(self):
+
+    def test_change_priority_high(self):
         """
-        Tests change priority method
+        Tests change priority to HIGH
         :return:
         """
         task = Task("T1") #created by default with UNASSIGNED priority
         task.change_priority(Task.Priority.HIGH)
         self.assertEqual(Task.Priority.HIGH, task.priority)
 
-    def test_is_task_done(self):
+    def test_change_priority_low(self):
+            """
+            Tests change priority to LOW
+            :return:
+            """
+            task = Task("T1")  # created by default with UNASSIGNED priority
+            task.change_priority(Task.Priority.LOW)
+            self.assertEqual(Task.Priority.LOW, task.priority)
+
+    def test_change_priority_medium(self):
+        """
+        Tests change priority to MEDIUM
+        :return:
+        """
         task = Task("T1") #created by default with UNASSIGNED priority
-        self.assertEqual(False, task.is_done())
+        task.change_priority(Task.Priority.MEDIUM)
+        self.assertEqual(Task.Priority.MEDIUM, task.priority)
+
+    def test_task_done(self):
+        """
+        Tests if tasks is done
+        :return:
+        """
+        task = Task("T1")
         task.mark_status_complete()
         self.assertEqual(True, task.is_done())
+
+    def test_task_unassigned_not_done(self):
+        """
+        Tests if task is not done
+        :return:
+        """
+        task = Task("T1") # by default created with UNASSIGNED status
+        self.assertEqual(False, task.is_done())
+
+    def test_task_pending_not_done(self):
+        """
+        Tests if task is not done
+        :return:
+        """
+        task = Task("T1") # by default created with UNASSIGNED status
+        task.mark_status_pending()
+        self.assertEqual(False, task.is_done())
 
     def test_str(self):
         """

@@ -24,6 +24,16 @@ class Task:
         self.priority = priority
 
     @property
+    def title(self):
+        return self._title
+
+    @title.setter
+    def title(self, value):
+        if value is None or value == "":
+            raise ValueError("Invalid title")
+        self._title = value
+
+    @property
     def status(self):
         return self._status
     '''
