@@ -2,16 +2,17 @@
 import unittest
 from src.task import Task
 
-'''
-Tests Task using the following test scenarios:
-Task Creation - DONE
-Status Tests - DONE
-Priority Tests - DONE
-Task Is Done - DONE
-ToString equivalent __repr__
 
-'''
 class TestTask(unittest.TestCase):
+    """
+    Tests Task using the following test suites:
+    Task Creation
+    Task Status Tests
+    Task Priority Tests
+    Task Is Done Tests
+    __str__,  __repr__
+    """
+
     def test_create_task_with_default_values(self):
         """
         Tests Task creation with default values
